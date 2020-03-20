@@ -22,7 +22,10 @@ const app = () => {
         sound.addEventListener('click', function() {
             song.src = this.getAttribute('data-sound');
             video.src = this.getAttribute('data-video');
-            checkPlaying(song);
+            song.pause();
+            song.currentTime = 0;
+            play.src = './svg/play.svg';
+            video.pause();
         });
     });
 
@@ -35,6 +38,10 @@ const app = () => {
     timeSelect.forEach (option => {
         option.addEventListener('click', function() {
             fakeDutation = this.getAttribute('data-time');
+            song.pause();
+            song.currentTime = 0;
+            play.src = './svg/play.svg';
+            video.pause();
             timeDisplay.textContent = `${Math.floor(fakeDutation / 60)}:${Math.floor(fakeDutation % 60)}`;
         });
     });
@@ -52,7 +59,7 @@ const app = () => {
         }
     };
 
-    //We ccan animated the circle
+    //We can animated the circle
     song.ontimeupdate = () => {
         let currentTime = song.currentTime;
         let elapsed = fakeDutation - currentTime;
