@@ -33,6 +33,20 @@ const app = () => {
             play.src = './svg/play.svg';
         }
     };
+
+    //We ccan animated the circle
+    song.ontimeupdate = () => {
+        let currentTime = song.currentTime;
+        let elapsed = fakeDutation - currentTime;
+        let seconds = Math.floor(elapsed % 60);
+        let minutes = Math.floor(elapsed / 60);
+
+        //Animate the circle
+        let progress = outlineLenght - (currentTime / fakeDutation) * outlineLenght;
+        outline.style.strokeDashoffset = progress;
+        //Animate the text
+        timeDisplay.textContent = `${minutes}:${seconds}`;
+    };
 };
 
 app();
